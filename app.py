@@ -1,10 +1,17 @@
-from flask import Flask,jsonify, request
+from flask import Flask, jsonify, render_template, request
 
 app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    return "Hello World!"
+    return render_template('index.html', name = "Naman")
+
+@app.route('/form-forward', methods = ['GET', 'POST'])
+def form_forward():
+    if request.method == 'POST':
+        return render_template('form_forward.html', query = request.form['details'])
+    else:
+        return jsonify(message = "This is not valid"), 401
 
 @app.route('/api')
 def api():
@@ -14,15 +21,6 @@ def api():
 def not_found():
     return jsonify(message = "Not found"), 404
 
-@app.route('/age_check')
-def age_check():
-    name = request.args.get('name')
-    age = int(request.args.get('age'))
-
-    if age > 18:
-        return jsonify(message = "Welcome " + name)
-    else:
-        return jsonify(message = "Sorry " + name + " you are not old enough"), 401
 
 if __name__ == '__main__':
     app.run()
