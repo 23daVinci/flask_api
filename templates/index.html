@@ -1,1 +1,11 @@
 <h1>Welcome {{ name }}</h1>
+
+<form action = 'form-forward' method="POST">
+    <label for = 'mobile_number'>Mob. No.</label>
+    <input type = "number" name = "mobile_number" value = "" required>
+    <br>
+    <label for = 'details'>Queries</label>
+    <input type="text" name = "details" value = "" required>
+    <br>
+    <input type="submit" name = "submit_details" value = 'SUBMIT'>
+</form>
